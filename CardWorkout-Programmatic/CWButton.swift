@@ -8,29 +8,30 @@
 import UIKit
 
 class CWButton: UIButton {
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(backgroundColor: UIColor, title : String){
+    init(backgroundColor: UIColor, title: String, systemImageName: String) {
         super.init(frame: .zero)
-        self.backgroundColor = backgroundColor
-        setTitle(title, for: .normal)
-        configure()
-    }
-    
 
-    func configure(){
-        layer.cornerRadius = 10
+        var config = UIButton.Configuration.filled()
+        config.title = title
+        config.image = UIImage(systemName: systemImageName)
+        config.imagePadding = 8
+        config.baseBackgroundColor = backgroundColor
+        config.baseForegroundColor = .white
+        config.cornerStyle = .medium
+
+        self.configuration = config
+
         titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
-        setTitleColor(.white, for: .normal)
         translatesAutoresizingMaskIntoConstraints = false
     }
-
 }
+
